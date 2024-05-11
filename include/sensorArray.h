@@ -3,7 +3,8 @@
 
     #include <driver/gpio.h>
     #include <driver/adc.h>
-
+    #include <stdint.h>
+    
     struct MuxSelection{
         gpio_num_t S0;
         gpio_num_t S1;
@@ -23,7 +24,7 @@
         void calibrate();
 
         int32_t getLinePosition();
-
+        int32_t readSensor(uint16_t sensor);
 
     private:
         struct MuxSelection privMuxSel;
