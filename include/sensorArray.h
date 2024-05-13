@@ -1,5 +1,5 @@
-#ifndef __SENSOR_H__
-    #define __SENSOR_H__
+#ifndef __SENSOR_ARRAY_H__
+    #define __SENSOR_ARRAY_H__
 
     #include <driver/gpio.h>
     #include <driver/adc.h>
