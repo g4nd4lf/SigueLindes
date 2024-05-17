@@ -28,6 +28,7 @@ void MotorController::init()
     ledcTimer.duty_resolution = LEDC_TIMER_10_BIT;
     ledcTimer.clk_cfg = LEDC_AUTO_CLK;
     ledcTimer.timer_num = LEDC_TIMER_0;
+    ledcTimer.deconfigure = 0;
     ledc_timer_config(&ledcTimer);
     if (ledc_timer_config(&ledcTimer) != ESP_OK) {
         printf("Error: no se pudo configurar el temporizador LEDC\n");
@@ -59,4 +60,5 @@ void MotorController::setSpeeds(uint32_t speed1, uint32_t speed2){
     ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1, speed2);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1);
+    printf("Speeds: %ld, %ld\n", speed1, speed2);
 }
