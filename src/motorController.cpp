@@ -19,7 +19,7 @@ void MotorController::init()
     config.pull_down_en = GPIO_PULLDOWN_DISABLE;
     config.pull_up_en = GPIO_PULLUP_DISABLE;
     gpio_config(&config);
-
+    
     // Configure LEDC PWM timer for Motors speed
 
     ledc_timer_config_t ledcTimer;
@@ -29,7 +29,11 @@ void MotorController::init()
     ledcTimer.clk_cfg = LEDC_AUTO_CLK;
     ledcTimer.timer_num = LEDC_TIMER_0;
     ledc_timer_config(&ledcTimer);
-
+    if (ledc_timer_config(&ledcTimer) != ESP_OK) {
+        printf("Error: no se pudo configurar el temporizador LEDC\n");
+        return;
+    }
+    
     ledc_channel_config_t ledcChannel;
     ledcChannel.channel = LEDC_CHANNEL_0;
     ledcChannel.gpio_num = privPWM0;

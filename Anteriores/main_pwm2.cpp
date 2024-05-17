@@ -22,9 +22,9 @@ constexpr gpio_num_t BIN2 = GPIO_NUM_27;
 extern "C" void app_main();
 
 
-void app_main2()
+void app_main()
 {
-
+    printf("********Siguelineas V1********* \n");
     // Setup
     gpio_config_t config;
     config.mode = GPIO_MODE_OUTPUT;
@@ -113,7 +113,7 @@ void app_main2()
         vTaskDelay(pdMS_TO_TICKS(10));
         cnt += dir;
         
-        /*ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, cnt);
+        ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, cnt);
         ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
         ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1, cnt);
         ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1);
@@ -133,10 +133,10 @@ void app_main2()
             gpio_set_level(AIN2, a2);
             gpio_set_level(BIN1, b1);
             gpio_set_level(BIN2, b2);
-        }*/
-
-        adcValue = adc1_get_raw(ADC1_CHANNEL_0);
-        printf("Value: %d\n", adcValue);
+        }
+        printf("cnt= %ld, dir= %ld \n",cnt,dir);
+        //adcValue = adc1_get_raw(ADC1_CHANNEL_0);
+        //printf("Value: %d\n", adcValue);
 
         /*gpio_set_level(LED_PIN, 1);
         vTaskDelay(pdMS_TO_TICKS(300));

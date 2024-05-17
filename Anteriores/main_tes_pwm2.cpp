@@ -13,6 +13,7 @@ void app_main()
 {
 //Setup
 printf("********test PWM********* \n");
+
 gpio_config_t config;
 config.mode = GPIO_MODE_OUTPUT;
 config.pin_bit_mask = (1<<LED_PIN);
@@ -27,7 +28,11 @@ ledcTimer.freq_hz = 500;
 ledcTimer.duty_resolution = LEDC_TIMER_13_BIT;
 ledcTimer.clk_cfg = LEDC_AUTO_CLK;
 ledcTimer.timer_num = LEDC_TIMER_0;
-ledc_timer_config(&ledcTimer);
+//ledc_timer_config(&ledcTimer);
+if (ledc_timer_config(&ledcTimer) != ESP_OK) {
+        printf("Error: no se pudo configurar el temporizador LEDC\n");
+        return;
+    }
 
 ledc_channel_config_t ledcChannel;
 ledcChannel.channel = LEDC_CHANNEL_0;
@@ -37,8 +42,11 @@ ledcChannel.timer_sel = LEDC_TIMER_0;
 ledcChannel.intr_type = LEDC_INTR_DISABLE;
 ledcChannel.speed_mode = LEDC_LOW_SPEED_MODE;
 ledcChannel.flags.output_invert = 0;
-ledc_channel_config(&ledcChannel);
-
+//ledc_channel_config(&ledcChannel);
+if (ledc_channel_config(&ledcChannel) != ESP_OK) {
+        printf("Error: no se pudo configurar el canal LEDC\n");
+        return;
+    }
 
 
 uint32_t cnt=0;
